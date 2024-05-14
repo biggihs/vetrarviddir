@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetrarvíddir</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+        }
+        .background-image {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            font-weight: bold;
+            color: white;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="bgimage" src="" alt="Auroras" class="background-image">
+        <div class="centered-text">Vetrarvíddir</div>
+    </div>
+    <script>
+      const rand = (new Date()).getSeconds() % 6
+      const bg = ["/bg5.jpg", "/bg1.jpg", "/bg2.jpg", "/bg3.jpg", "/bg4.jpg",  "/bg6.jpg"]
+      document.getElementById("bgimage").src= bg[rand]
+    </script>
+</body>
+</html>
+
