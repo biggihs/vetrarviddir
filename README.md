@@ -1,4 +1,4 @@
-# Vetrarvíddir Astro Site
+# Vetrarvíddir Astro Site!
 
 A modern, fast website built with Astro and Tailwind CSS for winter adventure tours in North Iceland.
 
