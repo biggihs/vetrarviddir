@@ -1,0 +1,22 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  content: string;
+  link?: string;
+}
+
+const { icon, title, content, link } = Astro.props;
+---
+
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20 hover:bg-white/15 transition-all duration-300 hover:transform hover:-translate-y-1">
+  <div class="text-4xl mb-4">{icon}</div>
+  <h3 class="text-lg font-semibold text-primary mb-2">{title}</h3>
+  {link ? (
+    <a href={link} class="text-white hover:text-primary transition-colors font-medium">
+      {content}
+    </a>
+  ) : (
+    <p class="text-white/90">{content}</p>
+  )}
+</div>

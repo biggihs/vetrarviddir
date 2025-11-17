@@ -1,0 +1,75 @@
+---
+---
+
+<script>
+  // Navigation scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (nav) {
+      if (window.scrollY > 100) {
+        nav.classList.add('bg-black/90', 'backdrop-blur-lg');
+        nav.classList.remove('bg-transparent');
+      } else {
+        nav.classList.remove('bg-black/90', 'backdrop-blur-lg');
+        nav.classList.add('bg-transparent');
+      }
+    }
+  });
+
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburger = document.getElementById('hamburger');
+    
+    if (mobileMenu && hamburger) {
+      mobileMenu.classList.toggle('hidden');
+      hamburger.classList.toggle('active');
+    }
+  }
+
+  // Make function globally available
+  window.toggleMobileMenu = toggleMobileMenu;
+
+  // Set random background
+  function setRandomBackground() {
+    const backgrounds = [
+      '/images/bg1.jpg', '/images/bg2.jpg', '/images/bg3.jpg', '/images/bg4.jpg', '/images/bg5.jpg',
+      '/images/bg6.jpg', '/images/bg7.jpg', '/images/bg8.jpg', '/images/bg9.jpg', '/images/bg10.jpg'
+    ];
+    
+    const hero = document.getElementById('hero-bg');
+    if (hero) {
+      const randomIndex = new Date().getSeconds() % backgrounds.length;
+      hero.style.backgroundImage = `url('${backgrounds[randomIndex]}')`;
+    }
+  }
+
+  // Booking form handler
+  function handleBooking(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    
+    const data = Object.fromEntries(formData);
+    
+    const subject = `Booking Inquiry: ${data['trip-type'] || 'Adventure'}`;
+    const body = `Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone || 'Not provided'}
+Trip Type: ${data['trip-type'] || 'Not specified'}
+Preferred Dates: ${data.dates || 'Flexible'}
+Experience Level: ${data.experience || 'Not specified'}
+
+Message:
+${data.message || 'No additional message'}`;
+
+    const mailtoLink = `mailto:vetrarviddir@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  }
+
+  window.handleBooking = handleBooking;
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    setRandomBackground();
+  });
+</script>
