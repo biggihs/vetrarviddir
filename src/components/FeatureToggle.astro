@@ -1,0 +1,36 @@
+---
+import ComingSoon from './ComingSoon.astro';
+
+export interface Props {
+  feature: string;
+  comingSoonTitle?: string;
+  comingSoonMessage?: string;
+  comingSoonIcon?: string;
+  contactCta?: boolean;
+}
+
+const { feature, comingSoonTitle, comingSoonMessage, comingSoonIcon, contactCta = false } = Astro.props;
+
+// Import features config
+const { FEATURES, COMING_SOON_MESSAGES } = await import('../config/features.ts');
+
+// Check if feature is enabled
+const isEnabled = FEATURES[feature as keyof typeof FEATURES];
+
+// Get default coming soon content if not provided
+const defaultComingSoon = COMING_SOON_MESSAGES[feature as keyof typeof COMING_SOON_MESSAGES];
+const title = comingSoonTitle || defaultComingSoon?.title || 'Coming Soon';
+const message = comingSoonMessage || defaultComingSoon?.message || 'This feature is under development.';
+const icon = comingSoonIcon || defaultComingSoon?.icon || '🚧';
+---
+
+{isEnabled ? (
+  <slot />
+) : (
+  <ComingSoon 
+    title={title}
+    message={message}
+    icon={icon}
+    contactCta={contactCta}
+  />
+)}

@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import ContactCard from '../components/ContactCard.astro';
 import ClientScript from '../components/ClientScript.astro';
+import FeatureToggle from '../components/FeatureToggle.astro';
 
 const services = [
   {
@@ -73,87 +74,100 @@ const contactInfo = [
 
   <!-- About Section -->
   <section id="about" class="py-20 bg-black/90">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-4xl font-bold text-primary mb-8">About Birgir Hrafn</h2>
-      <div class="space-y-6 text-lg text-white/90 leading-relaxed">
-        <p class="text-xl">
-          Welcome to Vetrarvíddir! I'm Birgir Hrafn Sigurðsson, your guide to the spectacular winter wilderness of North Iceland.
-        </p>
-        <p>
-          With years of experience in Arctic conditions, I offer authentic cross-country skiing expeditions that combine professional expertise with unforgettable adventures.
-        </p>
-        <p>
-          Whether you're seeking a challenging solo journey or want to join a guided group expedition, I'll help you experience the raw beauty of Iceland's winter landscapes while staying safe and comfortable in huts, tents, or traditional snow houses.
-        </p>
-      </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <FeatureToggle feature="about">
+        <div class="text-center">
+          <h2 class="text-4xl font-bold text-primary mb-8">About Birgir Hrafn</h2>
+          <div class="space-y-6 text-lg text-white/90 leading-relaxed">
+            <p class="text-xl">
+              Welcome to Vetrarvíddir! I'm Birgir Hrafn Sigurðsson, your guide to the spectacular winter wilderness of North Iceland.
+            </p>
+            <p>
+              With years of experience in Arctic conditions, I offer authentic cross-country skiing expeditions that combine professional expertise with unforgettable adventures.
+            </p>
+            <p>
+              Whether you're seeking a challenging solo journey or want to join a guided group expedition, I'll help you experience the raw beauty of Iceland's winter landscapes while staying safe and comfortable in huts, tents, or traditional snow houses.
+            </p>
+          </div>
+        </div>
+      </FeatureToggle>
     </div>
   </section>
 
   <!-- Services Section -->
   <section id="services" class="py-20 bg-gray-900/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-primary mb-4">Our Winter Expeditions</h2>
-        <p class="text-xl text-white/80">Choose your perfect Arctic adventure</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service) => (
-          <ServiceCard {...service} />
-        ))}
-      </div>
+      <FeatureToggle feature="services" contactCta={true}>
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-primary mb-4">Our Winter Expeditions</h2>
+          <p class="text-xl text-white/80">Choose your perfect Arctic adventure</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <ServiceCard {...service} />
+          ))}
+        </div>
+      </FeatureToggle>
     </div>
   </section>
 
   <!-- Videos Section -->
   <section id="videos" class="py-20 bg-black/90">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-4xl font-bold text-primary mb-8">Winter Travel Videos</h2>
-      <p class="text-xl text-white/90 mb-12">
-        Follow our adventures and learn essential winter travel skills through our YouTube channel
-      </p>
-      
-      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-12 border border-white/20">
-        <div class="text-6xl mb-6">🎥</div>
-        <h3 class="text-2xl font-bold text-primary mb-4">Coming Soon: YouTube Channel</h3>
-        <p class="text-white/80 mb-8 text-lg">
-          Winter expedition documentaries, skiing tutorials, and Arctic survival knowledge
-        </p>
-        <a 
-          href="mailto:vetrarviddir@gmail.com?subject=YouTube Channel Updates" 
-          class="inline-block bg-primary text-black px-8 py-3 rounded-lg font-semibold hover:bg-ice-blue transition-colors duration-300"
-        >
-          Get Notified When We Launch
-        </a>
-      </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <FeatureToggle feature="videos">
+        <div class="text-center">
+          <h2 class="text-4xl font-bold text-primary mb-8">Winter Travel Videos</h2>
+          <p class="text-xl text-white/90 mb-12">
+            Follow our adventures and learn essential winter travel skills through our YouTube channel
+          </p>
+          
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-12 border border-white/20">
+            <div class="text-6xl mb-6">🎥</div>
+            <h3 class="text-2xl font-bold text-primary mb-4">YouTube Channel</h3>
+            <p class="text-white/80 mb-8 text-lg">
+              Winter expedition documentaries, skiing tutorials, and Arctic survival knowledge
+            </p>
+            <a 
+              href="mailto:vetrarviddir@gmail.com?subject=YouTube Channel Updates" 
+              class="inline-block bg-primary text-black px-8 py-3 rounded-lg font-semibold hover:bg-ice-blue transition-colors duration-300"
+            >
+              Subscribe to Channel
+            </a>
+          </div>
+        </div>
+      </FeatureToggle>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="py-20 bg-gray-900/50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-primary mb-4">Contact Information</h2>
-        <p class="text-xl text-white/80">Get in touch to plan your winter adventure</p>
-      </div>
-      
-      <div class="grid md:grid-cols-3 gap-8">
-        {contactInfo.map((contact) => (
-          <ContactCard {...contact} />
-        ))}
-      </div>
+      <FeatureToggle feature="contact">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-primary mb-4">Contact Information</h2>
+          <p class="text-xl text-white/80">Get in touch to plan your winter adventure</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          {contactInfo.map((contact) => (
+            <ContactCard {...contact} />
+          ))}
+        </div>
+      </FeatureToggle>
     </div>
   </section>
 
   <!-- Booking Section -->
   <section id="booking" class="py-20 bg-black/90">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-primary mb-4">Book Your Winter Adventure</h2>
-        <p class="text-xl text-white/90">
-          Ready to experience the magic of North Iceland's winter wilderness? Send us your details and we'll get back to you within 24 hours.
-        </p>
-      </div>
+      <FeatureToggle feature="booking" contactCta={true}>
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-primary mb-4">Book Your Winter Adventure</h2>
+          <p class="text-xl text-white/90">
+            Ready to experience the magic of North Iceland's winter wilderness? Send us your details and we'll get back to you within 24 hours.
+          </p>
+        </div>
 
       <form 
         onsubmit="handleBooking(event)" 
@@ -256,6 +270,7 @@ const contactInfo = [
           Send Booking Inquiry
         </button>
       </form>
+      </FeatureToggle>
     </div>
   </section>
 
