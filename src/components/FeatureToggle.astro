@@ -3,19 +3,35 @@ import ComingSoon from './ComingSoon.astro';
 
 export interface Props {
   feature: string;
+  hideCompletely?: boolean;
   comingSoonTitle?: string;
   comingSoonMessage?: string;
   comingSoonIcon?: string;
   contactCta?: boolean;
 }
 
-const { feature, comingSoonTitle, comingSoonMessage, comingSoonIcon, contactCta = false } = Astro.props;
+const { 
+  feature, 
+  hideCompletely = false, 
+  comingSoonTitle, 
+  comingSoonMessage, 
+  comingSoonIcon, 
+  contactCta = false 
+} = Astro.props;
 
 // Import features config
-const { FEATURES, COMING_SOON_MESSAGES } = await import('../config/features.ts');
+const { FEATURES, COMING_SOON_MESSAGES, HIDE_COMPLETELY } = await import('../config/features.ts');
 
 // Check if feature is enabled
 const isEnabled = FEATURES[feature as keyof typeof FEATURES];
+
+// Check if this feature should be hidden completely (from config or prop)
+const shouldHideCompletely = hideCompletely || HIDE_COMPLETELY.includes(feature as any);
+
+// If feature is disabled and should hide completely, render nothing
+if (!isEnabled && shouldHideCompletely) {
+  // Return nothing - section will be completely hidden
+}
 
 // Get default coming soon content if not provided
 const defaultComingSoon = COMING_SOON_MESSAGES[feature as keyof typeof COMING_SOON_MESSAGES];
@@ -24,7 +40,9 @@ const message = comingSoonMessage || defaultComingSoon?.message || 'This feature
 const icon = comingSoonIcon || defaultComingSoon?.icon || '🚧';
 ---
 
-{isEnabled ? (
+{!isEnabled && shouldHideCompletely ? (
+  <!-- Section completely hidden -->
+) : isEnabled ? (
   <slot />
 ) : (
   <ComingSoon 

@@ -1,0 +1,41 @@
+---
+import FeatureToggle from './FeatureToggle.astro';
+import ContactCard from './ContactCard.astro';
+
+const contactInfo = [
+  {
+    icon: "📧",
+    title: "Email", 
+    content: "vetrarviddir@gmail.com",
+    link: "mailto:vetrarviddir@gmail.com"
+  },
+  {
+    icon: "📱",
+    title: "WhatsApp",
+    content: "+354-823-555-1", 
+    link: "https://wa.me/3548235551"
+  },
+  {
+    icon: "🏔️",
+    title: "Location",
+    content: "North Iceland"
+  }
+];
+---
+
+<FeatureToggle feature="contact">
+  <section id="contact" class="py-20 bg-gray-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-primary mb-4">Contact Information</h2>
+        <p class="text-xl text-white/80">Get in touch to plan your winter adventure</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        {contactInfo.map((contact) => (
+          <ContactCard {...contact} />
+        ))}
+      </div>
+    </div>
+  </section>
+</FeatureToggle>

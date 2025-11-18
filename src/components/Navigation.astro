@@ -1,4 +1,15 @@
 ---
+// Import features config to check what sections are enabled
+const { FEATURES, HIDE_COMPLETELY } = await import('../config/features.ts');
+
+// Helper function to check if a section should be shown in navigation
+const shouldShowInNav = (feature: string) => {
+  const isEnabled = FEATURES[feature as keyof typeof FEATURES];
+  const isHidden = HIDE_COMPLETELY.includes(feature as any);
+  
+  // Show in nav if enabled, or if disabled but not completely hidden (shows "coming soon")
+  return isEnabled || !isHidden;
+};
 ---
 
 <nav id="nav" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
@@ -15,13 +26,23 @@
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-8">
           <a href="#home" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Home</a>
-          <a href="#about" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">About</a>
-          <a href="#services" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Services</a>
-          <a href="#videos" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Videos</a>
-          <a href="#contact" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Contact</a>
-          <a href="#booking" class="bg-primary text-black px-4 py-2 rounded-md text-sm font-medium hover:bg-ice-blue transition-colors">
-            Book Trip
-          </a>
+          {shouldShowInNav('about') && (
+            <a href="#about" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">About</a>
+          )}
+          {shouldShowInNav('services') && (
+            <a href="#services" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Services</a>
+          )}
+          {shouldShowInNav('videos') && (
+            <a href="#videos" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Videos</a>
+          )}
+          {shouldShowInNav('contact') && (
+            <a href="#contact" class="text-white hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+          )}
+          {shouldShowInNav('booking') && (
+            <a href="#booking" class="bg-primary text-black px-4 py-2 rounded-md text-sm font-medium hover:bg-ice-blue transition-colors">
+              Book Trip
+            </a>
+          )}
         </div>
       </div>
 
@@ -42,13 +63,23 @@
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 bg-black/90 backdrop-blur-lg rounded-lg mt-2">
         <a href="#home" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Home</a>
-        <a href="#about" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">About</a>
-        <a href="#services" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Services</a>
-        <a href="#videos" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Videos</a>
-        <a href="#contact" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Contact</a>
-        <a href="#booking" class="bg-primary text-black block px-3 py-2 rounded-md text-base font-medium hover:bg-ice-blue">
-          Book Trip
-        </a>
+        {shouldShowInNav('about') && (
+          <a href="#about" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">About</a>
+        )}
+        {shouldShowInNav('services') && (
+          <a href="#services" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Services</a>
+        )}
+        {shouldShowInNav('videos') && (
+          <a href="#videos" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Videos</a>
+        )}
+        {shouldShowInNav('contact') && (
+          <a href="#contact" class="text-white hover:text-primary block px-3 py-2 text-base font-medium">Contact</a>
+        )}
+        {shouldShowInNav('booking') && (
+          <a href="#booking" class="bg-primary text-black block px-3 py-2 rounded-md text-base font-medium hover:bg-ice-blue">
+            Book Trip
+          </a>
+        )}
       </div>
     </div>
   </div>

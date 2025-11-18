@@ -1,0 +1,60 @@
+---
+import FeatureToggle from './FeatureToggle.astro';
+import ServiceCard from './ServiceCard.astro';
+
+const services = [
+  {
+    title: "1-Day Adventures",
+    description: "Perfect for beginners or those short on time. Experience cross-country skiing through stunning winter landscapes with a professional guide. Includes equipment and hot meals.",
+    features: [
+      "Professional instruction",
+      "All equipment provided", 
+      "Hot lunch in nature",
+      "Photography opportunities"
+    ],
+    duration: "1 day",
+    difficulty: "Beginner"
+  },
+  {
+    title: "2-Day Expeditions", 
+    description: "Immerse yourself deeper in the winter wilderness. Overnight in cozy mountain huts or heated tents under the northern lights. Perfect balance of adventure and comfort.",
+    features: [
+      "Overnight in huts/heated tents",
+      "Northern lights viewing",
+      "Traditional Icelandic meals", 
+      "Advanced skiing techniques"
+    ],
+    duration: "2 days",
+    difficulty: "Intermediate"
+  },
+  {
+    title: "3-Day Wilderness Journey",
+    description: "The ultimate winter adventure for experienced outdoor enthusiasts. Deep wilderness camping in snow houses and tents. Learn traditional Arctic survival skills.",
+    features: [
+      "Snow house construction",
+      "Arctic survival skills",
+      "Pristine wilderness access",
+      "Solo and group options"
+    ],
+    duration: "3 days", 
+    difficulty: "Advanced"
+  }
+];
+---
+
+<FeatureToggle feature="services" contactCta={true}>
+  <section id="services" class="py-20 bg-gray-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-primary mb-4">Our Winter Expeditions</h2>
+        <p class="text-xl text-white/80">Choose your perfect Arctic adventure</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+    </div>
+  </section>
+</FeatureToggle>
